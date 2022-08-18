@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -24,15 +25,26 @@ Route::get('/dashboard', function () {
 
 Route::get('/posts', function () {
     return view('allPosts',[
+        'title'=> 'Browse all of our posts',
         'posts'=> Post::all()
     ]);
 })->middleware(['auth'])->name('allPosts');
 
 Route::get('/post/{slug:slug}', function (Post $slug) {
-//    dd($slug);
+
     return view('single-post',[
         'post'=> $slug
     ]);
 })->middleware(['auth'])->name('singlePost');
+
+
+
+Route::get('/category/{category:slug}', function (Category $category) {
+
+    return view('allPosts',[
+        'title'=>'Post related to Category',
+        'posts'=> $category->posts
+    ]);
+})->middleware(['auth'])->name('postCategory');
 
 require __DIR__.'/auth.php';
