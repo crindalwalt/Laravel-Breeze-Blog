@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\Category;
+use App\Http\Controllers\PostController;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
 Route::get('/dashboard', function () {
@@ -29,6 +33,15 @@ Route::get('/posts', function () {
         'posts'=> Post::all()
     ]);
 })->middleware(['auth'])->name('allPosts');
+
+
+Route::get('/add', function () {
+    return view('createPost');
+})->middleware(['auth'])->name('createPost');
+
+
+Route::post('/add',[PostController::class,'store'])->middleware(['auth'])->name('storePost');
+
 
 Route::get('/post/{slug:slug}', function (Post $slug) {
 

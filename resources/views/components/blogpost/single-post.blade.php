@@ -9,7 +9,7 @@
         <p class="my-2">{{ $post->excerpt }}</p>
 
         <div class="text-2xl">Description: </div>
-        <div class="text-sm">{{ $post->description }}</div>
+        <div class="text-sm"><?= $post->description ?></div>
         <div class="mt-3">
             <a class="px-3 py-2 bg-green-200 rounded" href="/post/{{$post->slug}}" >Like Post</a>
         </div>

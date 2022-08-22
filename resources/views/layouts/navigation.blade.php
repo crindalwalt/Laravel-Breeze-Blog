@@ -11,14 +11,23 @@
                 </div>
 
                 <!-- Navigation Links -->
+
+                {{-- For Dashboard  --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                {{-- For All post page  --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('allPosts')" :active="request()->routeIs('allPosts')">
                         {{ __('Posts') }}
+                    </x-nav-link>
+                </div>
+                {{-- For Create post page  --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('createPost')" :active="request()->routeIs('createPost')">
+                        {{ __('Create Post') }}
                     </x-nav-link>
                 </div>
             </div>
