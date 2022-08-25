@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('excerpt');
             $table->text('slug');
             $table->longText('description');
-            $table->foreignId('author_id');
+            $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->timestamps();
         });

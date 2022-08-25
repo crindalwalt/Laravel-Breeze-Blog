@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
-use App\Models\Post;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,46 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// ? Dashboard
+Route::get('/',function(){  return redirect('/dashboard');   });
+Route::get('/dashboard',[PostController::class,'dashboard'])->name('dashboard');
 
-Route::get('/', function () {
-    return redirect('/dashboard');
-});
+// ? Posts
+Route::get('/posts',[PostController::class,'index'])->name('allPosts');
+Route::get('/post/{slug:slug}',[PostController::class,'show'])->name('singlePost');
+Route::get('/add',[PostController::class,'create'])->name('createPost');
+Route::post('/add',[PostController::class,'store'])->name('storePost');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// ? Relation with category and User
+Route::get('/user/{user}',[UserController::class,'index'])->name('userPost'); 
+Route::get('/category/{category:slug}',[CategoryController::class,'index'])->name('postCategory');
 
-Route::get('/posts', function () {
-    return view('allPosts',[
-        'title'=> 'Browse all of our posts',
-        'posts'=> Post::all()
-    ]);
-})->middleware(['auth'])->name('allPosts');
-
-
-Route::get('/add', function () {
-    return view('createPost');
-})->middleware(['auth'])->name('createPost');
-
-
-Route::post('/add',[PostController::class,'store'])->middleware(['auth'])->name('storePost');
-
-
-Route::get('/post/{slug:slug}', function (Post $slug) {
-
-    return view('single-post',[
-        'post'=> $slug
-    ]);
-})->middleware(['auth'])->name('singlePost');
-
-
-
-Route::get('/category/{category:slug}', function (Category $category) {
-
-    return view('allPosts',[
-        'title'=>'Post related to Category',
-        'posts'=> $category->posts
-    ]);
-})->middleware(['auth'])->name('postCategory');
 
 require __DIR__.'/auth.php';

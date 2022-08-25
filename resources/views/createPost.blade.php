@@ -22,7 +22,7 @@
                     <x-input id="excerpt" class="p-2 border w-full" name="excerpt"/>
                 </div>
                 <x-label for="posteditor" class="mt-4 mb-2 text-2xl">Write Your Post Here</x-label>
-                <textarea name="posteditor" id="posteditor" class="w-full"></textarea>
+                <textarea name="posteditor" id="summernote" class="w-full"></textarea>
 
 
                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">

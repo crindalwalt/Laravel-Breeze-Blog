@@ -41,7 +41,7 @@
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
                               #
                             </th>
-                            <th scope="col"      class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th colspan="2" scope="col"  class="text-sm font-medium text-gray-900 px-6 py-4">
                              Post Title
                             </th>
                             
@@ -53,7 +53,7 @@
                         <tbody>
                           <tr class="bg-white border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                            <td colspan="3" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               Mark
                             </td>
                           
