@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::get('/posts',[PostController::class,'index'])->name('allPosts');
 Route::get('/post/{slug:slug}',[PostController::class,'show'])->name('singlePost');
 Route::get('/add',[PostController::class,'create'])->name('createPost');
 Route::post('/add',[PostController::class,'store'])->name('storePost');
+Route::get('/deletePost/{post}',[PostController::class,'destroy'])->name('deletePost');
+
+Route::get('/comment/{post}',[CommentController::class,'store'])->name('storeComment');
 
 // ? Relation with category and User
 Route::get('/user/{user}',[UserController::class,'index'])->name('userPost'); 

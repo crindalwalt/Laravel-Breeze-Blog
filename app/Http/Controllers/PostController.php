@@ -50,27 +50,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        // // dd($request->all());
-        // $title = $request->title;
-        // $excerpt = $request->excerpt;
-        // $category_id = $request->category;
-        // $user_id = $request->user_id;
-        // $posteditor  = $request->posteditor;
-        // // dd($title,$excerpt,$category_id,$user_id,$posteditor);
-        // // dd($posteditor);
-
-        // $newPost = new Post;
-        // $newPost->title = $title;
-        // $newPost->excerpt = $excerpt;
-        // $newPost->slug = strtolower(str_replace(" ", "_", $title));
-        // $newPost->description = $posteditor;
-        // $newPost->user_id = $user_id;
-        // $newPost->category_id = $category_id;
-        // $newPost->save();
-        // redirect('/posts');
-
-
         $this->validate($request, [
             'title' => 'required',  
             'excerpt' => ['required','string'],  
@@ -78,43 +57,25 @@ class PostController extends Controller
             'posteditor' => 'required'
        ]);
 
-   
       $posteditor = $request->posteditor;
-
       $dom = new \DomDocument();
-
       $dom->loadHtml($posteditor, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
-
       $images = $dom->getElementsByTagName('img');
-
       foreach($images as $k => $img){
-
-
           $data = $img->getAttribute('src');
-
           list($type, $data) = explode(';', $data);
-
           list(, $data)      = explode(',', $data);
-
           $data = base64_decode($data);
-
           $image_name= "/upload/" . time().$k.'.png';
-
           $path = public_path() . $image_name;
-
           file_put_contents($path, $data);
-
           $img->removeAttribute('src');
-
           $img->setAttribute('src', $image_name);
-
        }
-
-
       $posteditor = $dom->saveHTML();
 
-      $summernote = new Post;
 
+      $summernote = new Post;
       $summernote->title = $request->title;
       $summernote->excerpt = $request->excerpt;
       $summernote->category_id = $request->category;
@@ -123,6 +84,7 @@ class PostController extends Controller
       $summernote->description = $posteditor;
 
       $summernote->save();
+
       if($summernote->save()){
         echo "data saved successfully";
       }else{
@@ -134,5 +96,11 @@ class PostController extends Controller
   
 
   
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect('/dashboard');
     }
 }

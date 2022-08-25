@@ -16,4 +16,8 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(\App\Models\User::class);
     }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class,'post_id');
+    }
 }
