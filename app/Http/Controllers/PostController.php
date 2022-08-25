@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -16,8 +18,11 @@ class PostController extends Controller
 
     // ? Redirection to dashboard
     public function dashboard()
-    {
-        return view('/dashboard');
+    {   
+     
+        return view('/dashboard',[
+            'posts'=>User::find(Auth::id())->posts,
+        ]);
     }
 
     // ? Method to show all Post at /posts
